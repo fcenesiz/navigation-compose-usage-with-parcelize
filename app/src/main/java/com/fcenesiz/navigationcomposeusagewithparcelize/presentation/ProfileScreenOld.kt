@@ -6,21 +6,36 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.Button
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
 import androidx.navigation.NavController
 import com.fcenesiz.navigationcomposeusagewithparcelize.data.User
-import com.fcenesiz.navigationcomposeusagewithparcelize.presentation.destinations.PostScreenDestination
 import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.ZoneId
 
-@Destination
+
 @Composable
-fun ProfileScreen(
-    navigator: DestinationsNavigator,
-    user: User
+fun ProfileScreenOld(
+    navController: NavController,
+    name: String,
+    userId: String,
+    timestamp: Long
 ) {
+
+    val user = remember {
+        User(
+            name = name,
+            id = userId,
+            created = LocalDateTime.ofInstant(
+                Instant.ofEpochMilli(timestamp), ZoneId.systemDefault()
+            )
+        )
+    }
+
     Column(
         modifier = Modifier.fillMaxSize(),
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -32,12 +47,11 @@ fun ProfileScreen(
         )
         Button(
             onClick = {
-                navigator.navigate(
-                    PostScreenDestination()
-                )
+                navController.navigate(Screen.PostScreen.withArgs("true"))
             }
         ) {
             Text(text = "Go to Post Screen")
         }
     }
+
 }

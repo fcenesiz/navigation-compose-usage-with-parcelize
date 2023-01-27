@@ -8,9 +8,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import com.ramcosta.composedestinations.annotation.Destination
 
-@Destination
+
 @Composable
-fun PostScreen(
+fun PostScreenOld(
     showOnlyPostByUser: Boolean = false
 ) {
     Box(

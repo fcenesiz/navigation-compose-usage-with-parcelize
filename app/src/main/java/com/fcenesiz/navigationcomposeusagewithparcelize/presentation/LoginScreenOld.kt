@@ -8,17 +8,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
-import com.fcenesiz.navigationcomposeusagewithparcelize.data.User
-import com.fcenesiz.navigationcomposeusagewithparcelize.presentation.destinations.ProfileScreenDestination
-import com.ramcosta.composedestinations.annotation.Destination
-import com.ramcosta.composedestinations.navigation.DestinationsNavigator
-import java.time.LocalDateTime
 
 
-@Destination(start = true)
 @Composable
-fun LoginScreen(
-    navigator: DestinationsNavigator
+fun LoginScreenOld(
+    navController: NavController
 ) {
     Column(
         verticalArrangement = Arrangement.Center,
@@ -31,13 +25,11 @@ fun LoginScreen(
         Spacer(modifier = Modifier.height(16.dp))
         Button(
             onClick = {
-                navigator.navigate(
-                    ProfileScreenDestination(
-                        User(
-                            name = "Fatih Cenesiz",
-                            id = "userId",
-                            created = LocalDateTime.now()
-                        )
+                navController.navigate(
+                    Screen.ProfileScreen.withArgs(
+                        "fatih",
+                        "userid",
+                        "123456789"
                     )
                 )
             }
